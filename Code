@@ -1,0 +1,87 @@
+class Account {
+    protected double balance;
+
+    public Account(double balance) {
+        this.balance = balance;
+    }
+
+    public void deposit(double amount) {
+        balance += amount;
+        System.out.println("Deposit: " + amount);
+    }
+
+    public void withdraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+            System.out.println("Withdraw: " + amount);
+        } else {
+            System.out.println("Not enough balance!");
+        }
+    }
+
+    public void showBalance() {
+        System.out.println("Balance: " + balance);
+    }
+}
+// SavingsAccount
+class SavingsAccount extends Account {
+    private double interestRate = 0.05;
+
+    public SavingsAccount(double balance) {
+        super(balance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        double interest = amount * interestRate;
+        balance += amount + interest;
+        System.out.println("Deposit with interest: " + (amount + interest));
+    }
+}
+// SavingsAccount
+class SavingsAccount extends Account {
+    private double interestRate = 0.05;
+
+    public SavingsAccount(double balance) {
+        super(balance);
+    }
+
+    @Override
+    public void deposit(double amount) {
+        double interest = amount * interestRate;
+        balance += amount + interest;
+        System.out.println("Deposit with interest: " + (amount + interest));
+    }
+}
+// CreditAccount
+class CreditAccount extends Account {
+    private double creditLimit = 1000;
+
+    public CreditAccount(double balance) {
+        super(balance);
+    }
+
+    @Override
+    public void withdraw(double amount) {
+        if (balance + creditLimit >= amount) {
+            balance -= amount;
+            System.out.println("Withdraw with credit: " + amount);
+        } else {
+            System.out.println("Credit limit exceeded!");
+        }
+    }
+}
+// Main класс
+public class Main {
+    public static void main(String[] args) {
+
+        Account acc1 = new SavingsAccount(1000);
+        Account acc2 = new CreditAccount(500);
+
+        acc1.deposit(200);
+        acc1.showBalance();
+
+        acc2.withdraw(1200);
+        acc2.showBalance();
+    }
+}
